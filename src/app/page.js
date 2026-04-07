@@ -5,6 +5,9 @@ import { Typography } from "@mui/material";
 import { Button }from "@mui/material";
 
 
+import Table from "./components/Table/Table.jsx";
+
+
 export default function Home() {
   return (
       <>
@@ -15,6 +18,12 @@ export default function Home() {
               <Typography component='p'>Description</Typography>
               <Button variant="outlined">Outlined</Button>
 
+          </Container>
+        </section>
+        <section className="py-[95px] px-0">
+          <Container>
+            <Typography variant="h1" component='h3' align="center" gutterBottom>Today's Crypto Prices</Typography>
+            <Table/>
           </Container>
         </section>
       </>
