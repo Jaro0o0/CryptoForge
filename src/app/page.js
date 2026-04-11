@@ -23,6 +23,9 @@ import { rotate } from "three/src/nodes/utils/RotateNode";
 import { Opacity } from "@mui/icons-material";
 
 
+import { getData } from "@/utils/getData";
+import { useState, useEffect } from "react";
+
 const svgVariants = {
   hidden:{
     rotate: -180
@@ -53,8 +56,28 @@ const pathVariants ={
 }
 
 export default function Home() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getData();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Pusta tablica [] zapewnia, że pobieranie wykona się tylko raz po załadowaniu strony
+
+  const btcPrice = data?.find(coin => coin.id === 'bitcoin')?.current_price;
+
   return (
       <>
+      <Typography variant='h1' align="center">
+        {btcPrice ? `BTC: $${btcPrice.toLocaleString()}` : 'Loading...'}
+      </Typography>
         <section className="w-full h-screen bg-linear-to-r from-cyan-500 to-purple-500 relative">
           <Container className='absolute top-[20%] left-[10%] grid grid-cols-2'>
             <Box>
