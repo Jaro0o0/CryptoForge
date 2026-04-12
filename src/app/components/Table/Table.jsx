@@ -12,6 +12,9 @@ import { useState, useEffect } from "react";
 //api
 import { getData } from '@/utils/getData';
 
+// Box
+import CoinBox from '../CoinBox/CoinBox';
+
 
 
 function BasicTable() {
@@ -31,8 +34,15 @@ function BasicTable() {
   
       fetchData();
     }, []); 
-  
+
+    // SHARE_BTC
     const btcPrice = data?.find(coin => coin.id === 'bitcoin')?.current_price;
+
+    //SHARE_ETH
+    const ethPrice = data?.find(coin => coin.id === 'ethereum')?.current_price;
+
+    // SHARE_SOL
+     const solPrice = data?.find(coin => coin.id === 'solana')?.current_price;
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -45,9 +55,22 @@ function BasicTable() {
 
     return ( 
       <>
-      <Typography variant='h4' align="center" sx={{ mb: 4 }}>
-        {btcPrice ? `BTC Price: $${btcPrice.toLocaleString()}` : 'Loading BTC Price...'}
-      </Typography>
+      <Box className='flex mb-2 justify-between'>
+        {/* BTC_BOX */}
+        <CoinBox>
+          <Typography variant='h4'  sx={{ mb: 4 }}>
+          {btcPrice ? `BTC Price: $${btcPrice.toLocaleString()}` : 'Loading BTC Price...'}
+          </Typography>
+        </CoinBox>
+        {/* ETH_BOX */}
+        <CoinBox>
+            <Typography variant='h4'>{btcPrice ? `ETH Price: $${ethPrice.toLocaleString()}` : 'Loading BTC Price...'}</Typography>
+        </CoinBox>
+        {/* SOL_BOX */}
+          <CoinBox>
+            <Typography variant='h4'>{solPrice ? `SOL Price: $${solPrice.toLocaleString()}` : 'Loading BTC Price...'}</Typography>
+        </CoinBox>
+      </Box>
 
         <TableContainer component={Paper} sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
