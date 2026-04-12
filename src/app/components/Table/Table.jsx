@@ -55,6 +55,7 @@ function BasicTable() {
 
     return ( 
       <>
+      {/* COINS_BOXES */}
       <Box className='flex mb-2 justify-between'>
         {/* BTC_BOX */}
         <CoinBox>
