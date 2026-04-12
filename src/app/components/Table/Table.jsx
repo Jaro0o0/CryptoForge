@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, TablePagination } from '@mui/material';
 
 import { useState, useEffect } from "react";
 
@@ -16,6 +16,8 @@ import { getData } from '@/utils/getData';
 
 function BasicTable() {
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -31,6 +33,15 @@ function BasicTable() {
     }, []); 
   
     const btcPrice = data?.find(coin => coin.id === 'bitcoin')?.current_price;
+
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
 
     return ( 
       <>
@@ -50,7 +61,9 @@ function BasicTable() {
         </TableHead>
         <TableBody>
           {data && data.length > 0 ? (
-            data.slice(0, 10).map((coin) => (
+            data
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((coin) => (
               <TableRow
                 key={coin.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -79,6 +92,15 @@ function BasicTable() {
         </TableBody>
       </Table>
     </TableContainer>
+    <TablePagination
+      rowsPerPageOptions={[5, 10, 25]}
+      component="div"
+      count={data.length}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
     </>
      );
 }
