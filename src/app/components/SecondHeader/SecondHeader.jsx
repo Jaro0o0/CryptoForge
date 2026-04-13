@@ -16,7 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 
-function Header() {
+function SecondHeader() {
         const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -35,19 +35,30 @@ return (
 
 
    
-    <Box sx={{ flexGrow: 1, backgroundColor: 'transparent' }}>
-      
+    <Box sx={{ flexGrow: 1 }}>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? 'Logout' : 'Login'}
+        />
+      </FormGroup>
       <AppBar 
-        
+        position="static" 
         className='backdrop-blur-lg' 
-        elevation={0}
-        sx={{
-            backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: 'none',
-          }}
+        sx={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)', 
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+          borderRadius: '0 0 16px 16px' 
+        }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar>
           <IconButton
             size="large"
             edge="start"
@@ -57,16 +68,9 @@ return (
           >
             <MenuIcon />
           </IconButton>
-
-             {/* MENU */}
-              <Box className='flex gap-10'>
-                <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>Home</Typography>
-                <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>Market</Typography>
-                <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>Choose Us</Typography>
-                <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>Join</Typography>
-              </Box>
-      
-          
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Photos
+          </Typography>
           {auth && (
             <div>
               <IconButton
@@ -77,7 +81,7 @@ return (
                 onClick={handleMenu}
                 color="inherit"
               >
-              <AccountCircle />
+                <AccountCircle />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -105,4 +109,4 @@ return (
      );
 }
 
-export default Header;
+export default SecondHeader;

@@ -24,6 +24,7 @@ import { Opacity } from "@mui/icons-material";
 
 
 import { getData } from "@/utils/getData";
+import SecondHeader from "./components/SecondHeader/SecondHeader";
 
 
 const svgVariants = {
@@ -61,9 +62,9 @@ export default function Home() {
   return (
       <>
         <section className="w-full h-screen bg-linear-to-r from-cyan-500 to-purple-500 relative">
-          <Container className='absolute top-[20%] left-[10%] grid grid-cols-2'>
+          <Container className='absolute top-1/2 left-1/2 -translate-1/2  grid grid-cols-2'>
             <Box>
-              <Header/>
+              <SecondHeader/>
               <Typography variant="h1" component='h3'>Crypto</Typography>
               <Typography component='p'>Description</Typography>
               <Button variant="outlined">Outlined</Button>
@@ -178,15 +179,23 @@ export default function Home() {
               {/* TEXT_BOX */}
               <Box>
                 <Typography variant="h1" align="center" >JOIN US</Typography>
-                <Typography variant="h1" align="center" gutterBottom>Discord</Typography>
+
+                <Box className='flex'>
+                  <Typography variant="h1" align="center" gutterBottom>Discord</Typography>
+                      {/* ETHERIUM_3D */}
+                  <Canvas>
+                    <ETH/>
+                  </Canvas>
+              </Box>
+
                 <Typography component='p' align="center" gutterBottom>Invest and manage your crypto at one place</Typography>
               </Box>
-          
               <Button variant="outlined" size="lg">Join Discord</Button>
             </Box>
           </Container>
+           
               {/* SVGS */}
-              <Box className='flex gap-6 mb-10 absolute bottom-0 left-1/2 -translate-x-1/2'>
+              <Box className='flex gap-6 mb-10 absolute bottom-[20%] left-1/2 -translate-x-1/2'>
                   {/* DISCORD_SVG */}
                   <Box className='flex justify-center items-center bg-linear-to-r from-cyan-500 to-purple-500 p-3 rounded-full'>
                     <motion.svg variants={svgVariants} initial='hidden' animate='visible'  xmlns="http://www.w3.org/2000/svg" className="w-10 h-10"  fill="none" stroke="white"   viewBox="0 0 16 16">
@@ -206,8 +215,13 @@ export default function Home() {
                     </motion.svg>
                   </Box>
               </Box>
+              <Typography component='p'>Privacy</Typography>
+              <Typography component='p'>Terms of use</Typography>
+
           {/* <Image src='/imgs/join-img.png' width={500} height={500} className="absolute bottom-0"/> */}
           <Image src='/imgs/media-img.png' width={500} height={500} className="absolute bottom-0 right-0"/>
+          <Image src='/imgs/undraw_bitcoin_q7r1.png' width={500} height={500} className="absolute bottom-0 left-0"/>
+          
         </section>
         
       </>
