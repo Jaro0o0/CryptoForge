@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box } from "@mui/system";
 import { 
   Typography, 
@@ -15,18 +15,35 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Canvas } from "@react-three/fiber";
 import ETH from "../ETH/ETH";
-
-
-
+import CoinBox from '../CoinBox/CoinBox';
+import { getData } from '@/utils/getData';
 
 const HeroInner = () => {
+  // data fetch
+  const [data, setData] = useState([]);
 
-//filter
-const [open, setOpen] = useState(false)
-const toogleButton = () =>{
-    setOpen(!open)
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getData();
+      setData(result);
+    }
+    fetchData();
 
-}
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // SHARE_BTC
+  const btcPrice = data?.find(coin => coin.id === 'bitcoin')?.current_price;
+  const ethPrice = data?.find(coin => coin.id === 'ethereum')?.current_price;
+    // SHARE_SOL
+    const solPrice = data?.find(coin => coin.id === 'solana')?.current_price;
+
+  // filter
+  const [open, setOpen] = useState(false);
+  const toggleButton = () => {
+    setOpen(!open);
+  };
 
 
 
@@ -110,15 +127,38 @@ const toogleButton = () =>{
           </Box>
 
 
-          
+
         {/* TEXT_BOX */}
         {  open && <Box>
           <Typography variant="h1" component='h3'>Crypto</Typography>
           <Typography component='p'>Description</Typography>
           <Button variant="outlined">Outlined</Button>
         </Box>   }
-  
+        
+        {/* MOST_PUPULAR */}
+        {!open &&  
+        <>
+        <Box className='flex'>
+            <CoinBox>
+                    <Typography variant='h4'>{btcPrice ? `Btc Price: $${btcPrice.toLocaleString()}` : 'Loading BTC Price...'}</Typography>
+            </CoinBox>
+            <CoinBox>
+                    <Typography variant='h4'>{ethPrice  ? `ETH Price: $${ethPrice .toLocaleString()}` : 'Loading ETH Price...'}</Typography>
+            </CoinBox>
+             <CoinBox>
+                    <Typography variant='h4'>{ solPrice ? `SOL Price: $${ solPrice .toLocaleString()}` : 'Loading ETH Price...'}</Typography>
+            </CoinBox>
         </Box>
+        </>
+
+       
+        
+        
+        }
+
+
+        </Box>
+        {/* 3D_BOX */}
         <Box sx={{ height: '500px' }}>
           <Canvas>
             <ETH />
