@@ -25,6 +25,7 @@ import { Opacity } from "@mui/icons-material";
 
 import { getData } from "@/utils/getData";
 import SecondHeader from "./components/SecondHeader/SecondHeader";
+import HeroInner from "./components/HeroInner/HeroInner";
 
 
 const svgVariants = {
@@ -61,22 +62,7 @@ export default function Home() {
   
   return (
       <>
-        <section className="w-full h-screen bg-linear-to-r from-cyan-500 to-purple-500 relative">
-          <Container className='absolute top-1/2 left-1/2 -translate-1/2  grid grid-cols-2'>
-            <Box>
-              <SecondHeader/>
-              <Typography variant="h1" component='h3'>Crypto</Typography>
-              <Typography component='p'>Description</Typography>
-              <Button variant="outlined">Outlined</Button>
-            </Box>
-            <Box sx={{ height: '500px' }}>
-              <Canvas>
-                <ETH/>
-              </Canvas>
-            </Box>
-
-          </Container>
-        </section>
+        <HeroInner/>
         {/* Table */}
         <section className="py-[95px] px-0">
           <Container>

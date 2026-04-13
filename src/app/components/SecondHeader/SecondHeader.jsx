@@ -16,8 +16,23 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 
+// hooks
+import { useState,useEffect } from "react";
+
+// //filter
+// const [open, setOpen] = useEffect(false)
+// const toogleButton = () =>{
+//     setOpen(!open)
+
+// }
+
+
+
+
 function SecondHeader() {
-        const [auth, setAuth] = React.useState(true);
+
+
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleChange = (event) => {
@@ -36,29 +51,18 @@ return (
 
    
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
       <AppBar 
         position="static" 
-        className='backdrop-blur-lg' 
+        className='backdrop-blur-lg rounded-md' 
         sx={{ 
           backgroundColor: 'rgba(255, 255, 255, 0.05)', 
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)', 
           boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-          borderRadius: '0 0 16px 16px' 
+        //   borderRadius: '0 0 16px 16px' 
         }}
+
       >
-        <Toolbar>
+        <Toolbar >
           <IconButton
             size="large"
             edge="start"
@@ -66,11 +70,16 @@ return (
             aria-label="menu"
             sx={{ mr: 2 }}
           >
+   
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
-          </Typography>
+                   {/* MENU */}
+                          <Box className='flex gap-10'>
+                            <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>New</Typography>
+                            <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>Most popular</Typography>
+                           
+                          </Box>
+     
           {auth && (
             <div>
               <IconButton
