@@ -33,11 +33,10 @@ const HeroInner = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // SHARE_BTC
-  const btcPrice = data?.find(coin => coin.id === 'bitcoin')?.current_price;
-  const ethPrice = data?.find(coin => coin.id === 'ethereum')?.current_price;
-    // SHARE_SOL
-    const solPrice = data?.find(coin => coin.id === 'solana')?.current_price;
+  // Full coin data
+  const btcData = data?.find(coin => coin.id === 'bitcoin');
+  const ethData = data?.find(coin => coin.id === 'ethereum');
+  const solData = data?.find(coin => coin.id === 'solana');
 
   // filter
   const [open, setOpen] = useState(false);
@@ -84,10 +83,12 @@ const HeroInner = () => {
                   <MenuIcon />
                 </IconButton>
                 <Box className='flex gap-10'>
-                  <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>New</Typography>
-                  <Typography component='p' sx={{ fontWeight: 'bold', cursor: 'pointer' }}>Most popular</Typography>
+                  
+                  <Button onClick={()=> setOpen(prev => !prev)} sx={{color: 'white'}}>News</Button>
                   {/* TOOGLE_BUTTON */}
-                  <Button onClick={()=> setOpen(prev => !prev)}>Most popular</Button>
+                  <Button onClick={()=> setOpen(prev => !prev)} sx={{color: 'white'}}>Most popular</Button>
+
+                  
                 </Box>
                 <Box sx={{ flexGrow: 1 }} />
                 {auth && (
@@ -130,23 +131,53 @@ const HeroInner = () => {
 
         {/* TEXT_BOX */}
         {  open && <Box>
-          <Typography variant="h1" component='h3'>Crypto</Typography>
-          <Typography component='p'>Description</Typography>
-          <Button variant="outlined">Outlined</Button>
+          <Typography 
+            variant="h1" 
+            component='h3' 
+            className='text-white font-bold drop-shadow-lg'
+            sx={{ mb: 2 }}
+          >
+            CryptoForge
+          </Typography>
+          <Typography 
+            component='p' 
+            className='text-white/80 max-w-md text-lg leading-relaxed'
+            sx={{ mb: 2 }}
+          >
+            Step into the future of finance with CryptoForge.
+            Trade smarter, invest confidently, and grow your portfolio faster.
+            Everything you need, right at your fingertips.
+          </Typography>
+          <Button 
+            variant="contained" 
+            size="large" 
+            
+          >
+            Get Started
+          </Button>
         </Box>   }
         
         {/* MOST_PUPULAR */}
         {!open &&  
         <>
-        <Box className='flex'>
+        <Box className='flex gap-4'>
             <CoinBox>
-                    <Typography variant='h4'>{btcPrice ? `Btc Price: $${btcPrice.toLocaleString()}` : 'Loading BTC Price...'}</Typography>
+                <Box className='flex flex-col items-center gap-2'>
+                    {btcData?.image && <img src={btcData.image} alt="BTC" width={40} height={40} />}
+                    <Typography variant='h5'>{btcData ? `BTC: $${btcData.current_price.toLocaleString()}` : 'Loading BTC...'}</Typography>
+                </Box>
             </CoinBox>
             <CoinBox>
-                    <Typography variant='h4'>{ethPrice  ? `ETH Price: $${ethPrice .toLocaleString()}` : 'Loading ETH Price...'}</Typography>
+                <Box className='flex flex-col items-center gap-2'>
+                    {ethData?.image && <img src={ethData.image} alt="ETH" width={40} height={40} />}
+                    <Typography variant='h5'>{ethData ? `ETH: $${ethData.current_price.toLocaleString()}` : 'Loading ETH...'}</Typography>
+                </Box>
             </CoinBox>
              <CoinBox>
-                    <Typography variant='h4'>{ solPrice ? `SOL Price: $${ solPrice .toLocaleString()}` : 'Loading ETH Price...'}</Typography>
+                <Box className='flex flex-col items-center gap-2'>
+                    {solData?.image && <img src={solData.image} alt="SOL" width={40} height={40} />}
+                    <Typography variant='h5'>{solData ? `SOL: $${solData.current_price.toLocaleString()}` : 'Loading SOL...'}</Typography>
+                </Box>
             </CoinBox>
         </Box>
         </>
@@ -159,8 +190,8 @@ const HeroInner = () => {
 
         </Box>
         {/* 3D_BOX */}
-        <Box sx={{ height: '500px' }}>
-          <Canvas>
+        <Box sx={{ height: '600px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
             <ETH />
           </Canvas>
         </Box>

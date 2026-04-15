@@ -56,7 +56,7 @@ function BasicTable() {
     return ( 
       <>
       {/* COINS_BOXES */}
-      <Box className='flex mb-2 justify-between'>
+      <Box className='flex mb-2  gap-5'>
         {/* BTC_BOX */}
         <CoinBox>
           <Typography variant='h4'  sx={{ mb: 4 }}>
@@ -65,11 +65,11 @@ function BasicTable() {
         </CoinBox>
         {/* ETH_BOX */}
         <CoinBox>
-            <Typography variant='h4'>{btcPrice ? `ETH Price: $${ethPrice.toLocaleString()}` : 'Loading BTC Price...'}</Typography>
+            <Typography variant='h4'>{ethPrice ? `ETH Price: $${ethPrice.toLocaleString()}` : 'Loading ETH Price...'}</Typography>
         </CoinBox>
         {/* SOL_BOX */}
           <CoinBox>
-            <Typography variant='h4'>{solPrice ? `SOL Price: $${solPrice.toLocaleString()}` : 'Loading BTC Price...'}</Typography>
+            <Typography variant='h4'>{solPrice ? `SOL Price: $${solPrice.toLocaleString()}` : 'Loading SOL Price...'}</Typography>
         </CoinBox>
       </Box>
 

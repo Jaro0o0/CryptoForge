@@ -166,12 +166,14 @@ export default function Home() {
               <Box>
                 <Typography variant="h1" align="center" >JOIN US</Typography>
 
-                <Box className='flex'>
+                <Box className='flex items-center'>
                   <Typography variant="h1" align="center" gutterBottom>Discord</Typography>
                       {/* ETHERIUM_3D */}
-                  <Canvas>
-                    <ETH/>
-                  </Canvas>
+                  <Box sx={{ width: '100px', height: '100px' }}>
+                    <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
+                        <ETH/>
+                    </Canvas>
+                  </Box>
               </Box>
 
                 <Typography component='p' align="center" gutterBottom>Invest and manage your crypto at one place</Typography>
