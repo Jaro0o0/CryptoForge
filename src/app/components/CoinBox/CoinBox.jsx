@@ -1,9 +1,10 @@
 import { Box, Paper } from "@mui/material";
 
-function CoinBox({children}) {
+function CoinBox({children, onClick}) {
     return ( 
         <Box 
-            className="p-4 rounded-md flex-1"  
+            onClick={onClick}
+            className="p-4 rounded-md flex-1 cursor-pointer transition-all hover:bg-white/40"  
             sx={{ 
                 flexGrow: 1, 
                 backgroundColor: 'rgba(255, 255, 255, 0.3)', 
