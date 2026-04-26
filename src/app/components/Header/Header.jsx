@@ -111,14 +111,16 @@ function Header() {
                   transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
-                  PaperProps={{
-                    sx: {
-                      bgcolor: 'rgba(10, 15, 30, 0.95)',
-                      backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      color: 'white',
-                      mt: 1.5,
-                      minWidth: 150
+                  slotProps={{
+                    paper: {
+                      sx: {
+                        bgcolor: 'rgba(10, 15, 30, 0.95)',
+                        backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        color: 'white',
+                        mt: 1.5,
+                        minWidth: 150
+                      }
                     }
                   }}
                 >

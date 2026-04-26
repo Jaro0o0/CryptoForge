@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Box, Typography, Button } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -33,6 +33,12 @@ const pathVariants = {
 };
 
 const JoinUs = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="w-full min-h-screen py-24 px-0 relative overflow-hidden flex flex-col justify-center bg-gray-950 text-white">
       <Container maxWidth="lg" className="relative z-10">
@@ -54,9 +60,11 @@ const JoinUs = () => {
               </Typography>
               {/* ETHERIUM_3D */}
               <Box className="w-24 h-24 md:w-32 md:h-32">
-                <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
-                  <ETH />
-                </Canvas>
+                {mounted && (
+                  <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
+                    <ETH />
+                  </Canvas>
+                )}
               </Box>
             </Box>
 
@@ -152,3 +160,4 @@ const JoinUs = () => {
 };
 
 export default JoinUs;
+

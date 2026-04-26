@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { Container, Box } from "@mui/system";
 import { 
+  Container, 
+  Box,
   Typography, 
   Button, 
   AppBar, 
@@ -22,8 +23,10 @@ import { getData } from '@/utils/getData';
 const HeroInner = () => {
   const [data, setData] = useState([]);
   const [view, setView] = useState('home');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     async function fetchData() {
       const result = await getData();
       setData(result);
@@ -101,31 +104,35 @@ const HeroInner = () => {
                   backgroundImage: 'none'
                 }}
               >
-                <Toolbar className="justify-between px-4">
-                  <Box className='flex gap-2 md:gap-6'>
+                <Toolbar className="justify-center px-4">
+                  {/* BUTTONS */}
+                  <Box className='flex justify-center gap-2 md:gap-6'>
                     {['home', 'news', 'popular'].map((v) => (
                       <Button 
                         key={v}
                         onClick={()=> setView(v)} 
-                        // className={`capitalize transition-all duration-300 ${view === v ? 'text-cyan-400 font-bold' : 'text-gray-400 hover:text-white'}`}
-                         sx={{ 
-                  position: 'relative',
-                  '&:hover': {
-                    '&:after': {
-                      width: '100%',
-                    }
-                  },
-                  '&:after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: -4,
-                    left: 0,
-                    width: '0%',
-                    height: '2px',
-                    background: 'linear-gradient(to right, #22d3ee, #a855f7)',
-                    transition: 'width 0.3s ease',
-                  }
-                }}
+                        sx={{ 
+                          position: 'relative',
+                          color: 'white',
+                          fontSize: '1.05rem',
+                          
+                          textTransform: 'capitalize',
+                          '&:hover': {
+                            '&:after': {
+                              width: '100%',
+                            }
+                          },
+                          '&:after': {
+                            content: '""',
+                            position: 'absolute',
+                            bottom: -4,
+                            left: 0,
+                            width: '0%',
+                            height: '2px',
+                            background: 'linear-gradient(to right, #22d3ee, #a855f7)',
+                            transition: 'width 0.3s ease',
+                          }
+                        }}
                       >
                         {v === 'popular' ? 'Most Popular' : v}
                       </Button>
@@ -137,13 +144,15 @@ const HeroInner = () => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                PaperProps={{
-                  sx: {
-                    bgcolor: 'rgba(10, 15, 30, 0.95)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    color: 'white',
-                    mt: 1.5
+                slotProps={{
+                  paper: {
+                    sx: {
+                      bgcolor: 'rgba(10, 15, 30, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: 'white',
+                      mt: 1.5
+                    }
                   }
                 }}
               >
@@ -176,16 +185,30 @@ const HeroInner = () => {
                     Step into the next generation of finance. Trade with precision, 
                     invest with clarity, and dominate the market with CryptoForge.
                   </Typography>
-                  <Box className="flex gap-4 mt-3">
+                  <Box className="flex gap-4 mt-5">
                     <Button 
                       variant="contained" 
-                      className="rounded-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform font-bold text-lg shadow-lg shadow-cyan-500/20"
+                      className="rounded-full px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform font-bold text-base shadow-lg shadow-cyan-500/20"
                     >
                       Get Started
                     </Button>
                     <Button 
                       variant="outlined" 
-                      className="rounded-full px-8 py-3 border-white/10 text-white hover:bg-white/5 transition-colors font-bold text-lg"
+                      sx={{
+                       
+                        px: 3,
+                        py: 1,
+                        borderColor: 'rgba(6, 182, 212, 0.3)',
+                        color: '#22d3ee',
+                        fontSize: '1rem',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          borderColor: '#22d3ee',
+                          bgcolor: 'rgba(6, 182, 212, 0.05)',
+                        }
+                      }}
                     >
                       Learn More
                     </Button>
@@ -254,9 +277,11 @@ const HeroInner = () => {
           >
             <Box className="absolute w-[70%] h-[70%] bg-cyan-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none" />
             <Box className="absolute w-[50%] h-[50%] bg-purple-500/15 blur-[100px] rounded-full delay-700 animate-pulse pointer-events-none" />
-            <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
-              <ETH />
-            </Canvas>
+            {mounted && (
+              <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
+                <ETH />
+              </Canvas>
+            )}
           </motion.div>
         </Box>
       </Container>

@@ -1,7 +1,6 @@
 "use client" 
 
-import { Container } from "@mui/system";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import HeroInner from "./components/HeroInner/HeroInner";
 import MarketTable from "./components/MarketTable/MarketTable";
