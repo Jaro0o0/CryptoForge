@@ -12,6 +12,6 @@ export async function getData(params) {
         return data
     } catch (error) {
         console.error("Failed to fetch crypto data:", error);
-        return []; // Return an empty array as a fallback
+        return []; 
     }
 }

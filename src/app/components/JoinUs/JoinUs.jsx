@@ -40,26 +40,26 @@ const JoinUs = () => {
   }, []);
 
   return (
-    <section className="w-full min-h-screen py-24 px-0 relative overflow-hidden flex flex-col justify-center bg-gray-950 text-white">
-      <Container maxWidth="lg" className="relative z-10">
-        <Box className="flex flex-col items-center text-center gap-8">
+    <section className="w-full min-h-screen py-20 md:py-32 px-0 relative overflow-hidden flex flex-col justify-center bg-gray-950 text-white">
+      <Container maxWidth="lg" className="relative z-20">
+        <Box className="flex flex-col items-center text-center gap-6 md:gap-8">
           <Box>
             <Typography
               variant="h1"
-              className="font-bold tracking-tighter text-6xl md:text-8xl mb-2"
+              className="font-black tracking-tighter text-5xl sm:text-7xl md:text-8xl lg:text-9xl mb-2"
             >
               JOIN US
             </Typography>
 
-            <Box className="flex items-center justify-center gap-4">
+            <Box className="flex items-center justify-center gap-2 md:gap-4">
               <Typography
                 variant="h2"
-                className="font-bold text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500"
+                className="font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500"
               >
                 Discord
               </Typography>
               {/* ETHERIUM_3D */}
-              <Box className="w-24 h-24 md:w-32 md:h-32">
+              <Box className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32">
                 {mounted && (
                   <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
                     <ETH />
@@ -70,7 +70,7 @@ const JoinUs = () => {
 
             <Typography
               variant="body1"
-              className="text-gray-400 text-lg md:text-xl mt-4 max-w-md mx-auto"
+              className="text-gray-400 text-base md:text-xl mt-6 max-w-md mx-auto px-4 md:px-0"
             >
               Invest and manage your crypto at one place. Join our community to
               stay updated with the latest trends.
@@ -80,7 +80,7 @@ const JoinUs = () => {
           <Button
             variant="contained"
             size="large"
-            className="rounded-full px-10 py-4 text-lg font-semibold bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/20"
+            className="rounded-full px-8 md:px-12 py-3 md:py-4 text-base md:text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/20"
           >
             Join Discord
           </Button>
@@ -88,8 +88,8 @@ const JoinUs = () => {
       </Container>
 
       {/* SVGS / SOCIALS */}
-      <Box className="flex flex-col items-center gap-6 absolute bottom-32 left-1/2 -translate-x-1/2 z-10">
-        <Box className="flex gap-6">
+      <Box className="flex flex-col items-center gap-6 absolute bottom-10 md:bottom-20 left-1/2 -translate-x-1/2 z-20 w-full px-4">
+        <Box className="flex gap-4 md:gap-6">
           {[
             {
               d: "M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612",
@@ -107,14 +107,14 @@ const JoinUs = () => {
             <motion.div
               key={index}
               whileHover={{ scale: 1.1, y: -5 }}
-              className="flex justify-center items-center bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-white/10 p-4 rounded-full backdrop-blur-sm cursor-pointer hover:border-cyan-500/50 transition-colors"
+              className="flex justify-center items-center bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-white/10 p-3 md:p-4 rounded-full backdrop-blur-sm cursor-pointer hover:border-cyan-500/50 transition-colors"
             >
               <motion.svg
                 variants={svgVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="w-8 h-8"
+                className="w-6 h-6 md:w-8 md:h-8"
                 fill="none"
                 stroke="currentColor"
                 viewBox={icon.viewBox}
@@ -124,7 +124,7 @@ const JoinUs = () => {
             </motion.div>
           ))}
         </Box>
-        <Box className="flex gap-8 text-sm text-gray-500">
+        <Box className="flex gap-6 md:gap-8 text-[10px] md:text-sm text-gray-500">
           <Typography className="hover:text-cyan-400 cursor-pointer transition-colors">
             Privacy Policy
           </Typography>
@@ -134,27 +134,11 @@ const JoinUs = () => {
         </Box>
       </Box>
 
-      {/* BACKGROUND DECORATIONS / IMAGES */}
-      <Box className="absolute bottom-0 w-full h-1/2 pointer-events-none opacity-40 md:opacity-100">
-        <Image
-          src="/imgs/media-img.png"
-          alt="Crypto Media"
-          width={600}
-          height={600}
-          className="absolute bottom-[-10%] right-[-5%] object-contain"
-        />
-        <Image
-          src="/imgs/undraw_bitcoin_q7r1.png"
-          alt="Bitcoin Illustration"
-          width={600}
-          height={600}
-          className="absolute bottom-[-10%] left-[-5%] object-contain"
-        />
-      </Box>
+
 
       {/* GRADIENT BLOBS */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-cyan-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
     </section>
   );
 };

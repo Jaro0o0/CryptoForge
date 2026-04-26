@@ -51,16 +51,16 @@ const MarketTable = () => {
     <CoinBox>
       <Box className="flex items-center justify-between">
         <Box>
-          <Typography variant="body2" className="text-gray-400 uppercase tracking-wider font-semibold">
+          <Typography variant="body2" className="text-gray-400 uppercase tracking-wider font-semibold text-[10px] md:text-xs">
             {label}
           </Typography>
-          <Typography variant="h5" className="font-bold text-white mt-1">
+          <Typography variant="h5" className="font-bold text-white mt-1 text-lg md:text-2xl">
             {coin ? `$${coin.current_price.toLocaleString()}` : "Loading..."}
           </Typography>
         </Box>
         {coin && (
           <Box
-            className={`px-2 py-1 rounded text-xs font-bold ${
+            className={`px-2 py-1 rounded text-[10px] md:text-xs font-bold ${
               coin.price_change_percentage_24h > 0 ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"
             }`}
           >
@@ -73,41 +73,43 @@ const MarketTable = () => {
   );
 
   return (
-    <section className="py-[95px] px-0 bg-gray-950 relative overflow-hidden">
+    <section className="py-16 md:py-24 px-0 bg-gray-950 relative overflow-hidden">
       {/* GRADIENT BLOBS */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-64 md:w-96 h-64 md:h-96 bg-cyan-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-64 md:w-96 h-64 md:h-96 bg-purple-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
 
       <Container className="relative z-10">
         <Typography
           variant="h2"
           component="h3"
           align="center"
-          className="font-bold text-white mb-12 uppercase tracking-wider"
+          className="font-black text-white mb-10 md:mb-16 uppercase tracking-wider text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
         >
           Today's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Crypto Prices</span>
         </Typography>
 
         {/* Top Stats */}
-        <Box className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
           <StatBox coin={btc} label="Bitcoin" />
           <StatBox coin={eth} label="Ethereum" />
-          <StatBox coin={sol} label="Solana" />
+          <Box className="sm:col-span-2 md:col-span-1">
+            <StatBox coin={sol} label="Solana" />
+          </Box>
         </Box>
 
         {/* Main Table */}
         <TableContainer
           component={Paper}
-          className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+          className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-x-auto shadow-2xl"
           sx={{ backgroundColor: "transparent" }}
         >
-          <Table sx={{ minWidth: 650 }}>
+          <Table sx={{ minWidth: { xs: 800, md: 900 } }}>
             <TableHead className="bg-white/5">
               <TableRow>
-                <TableCell className="text-white font-bold border-white/10 py-6">Coin</TableCell>
-                <TableCell align="right" className="text-white font-bold border-white/10 py-6">Price</TableCell>
-                <TableCell align="right" className="text-white font-bold border-white/10 py-6">24h Change</TableCell>
-                <TableCell align="right" className="text-white font-bold border-white/10 py-6">Market Cap</TableCell>
+                <TableCell className="text-white font-bold border-white/10 py-4 md:py-6">Coin</TableCell>
+                <TableCell align="right" className="text-white font-bold border-white/10 py-4 md:py-6">Price</TableCell>
+                <TableCell align="right" className="text-white font-bold border-white/10 py-4 md:py-6">24h Change</TableCell>
+                <TableCell align="right" className="text-white font-bold border-white/10 py-4 md:py-6">Market Cap</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -119,22 +121,22 @@ const MarketTable = () => {
                     sx={{ "& td": { borderBottom: "1px solid rgba(255, 255, 255, 0.05)" } }}
                   >
                     <TableCell>
-                      <Box className="flex items-center gap-4">
-                        <img src={coin.image} alt={coin.name} className="w-10 h-10 group-hover:scale-110 transition-transform" />
+                      <Box className="flex items-center gap-3 md:gap-4">
+                        <img src={coin.image} alt={coin.name} className="w-8 h-8 md:w-10 md:h-10 group-hover:scale-110 transition-transform" />
                         <Box>
-                          <Typography className="text-white font-bold">{coin.name}</Typography>
-                          <Typography className="text-gray-400 text-xs uppercase">{coin.symbol}</Typography>
+                          <Typography className="text-white font-bold text-sm md:text-base">{coin.name}</Typography>
+                          <Typography className="text-gray-400 text-[10px] md:text-xs uppercase">{coin.symbol}</Typography>
                         </Box>
                       </Box>
                     </TableCell>
                     <TableCell align="right">
-                      <Typography className="text-white font-semibold">
+                      <Typography className="text-white font-semibold text-sm md:text-base">
                         ${coin.current_price.toLocaleString()}
                       </Typography>
                     </TableCell>
                     <TableCell align="right">
                       <Typography
-                        className={`font-bold ${
+                        className={`font-bold text-sm md:text-base ${
                           coin.price_change_percentage_24h > 0 ? "text-green-400" : "text-red-400"
                         }`}
                       >
@@ -143,7 +145,7 @@ const MarketTable = () => {
                       </Typography>
                     </TableCell>
                     <TableCell align="right">
-                      <Typography className="text-gray-300 font-medium">
+                      <Typography className="text-gray-300 font-medium text-sm md:text-base">
                         ${coin.market_cap.toLocaleString()}
                       </Typography>
                     </TableCell>
@@ -151,9 +153,9 @@ const MarketTable = () => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={4} align="center" className="py-20 text-gray-400">
+                  <TableCell colSpan={4} align="center" className="py-16 md:py-20 text-gray-400">
                     <Box className="flex flex-col items-center gap-4">
-                      <Box className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+                      <Box className="w-10 h-10 md:w-12 md:h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
                       Loading market data...
                     </Box>
                   </TableCell>

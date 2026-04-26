@@ -9,9 +9,15 @@ import {
   IconButton, 
   MenuItem, 
   Menu, 
-  Container 
+  Container,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Button
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { motion } from 'framer-motion';
 
@@ -19,6 +25,7 @@ function Header() {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +34,10 @@ function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,6 +48,53 @@ function Header() {
   };
 
   const navItems = ['Home', 'Market', 'Choose Us', 'Join'];
+
+  const drawer = (
+    <Box className="h-full bg-gray-950 text-white p-6">
+      <Box className="flex justify-between items-center mb-10">
+        <Typography 
+          variant="h6" 
+          className="font-black tracking-tighter"
+          sx={{ 
+            background: 'linear-gradient(to right, #22d3ee, #3b82f6, #a855f7)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          CryptoForge
+        </Typography>
+        <IconButton onClick={handleDrawerToggle} className="text-white">
+          <CloseIcon />
+        </IconButton>
+      </Box>
+      <List className="space-y-4">
+        {navItems.map((item) => (
+          <ListItem 
+            key={item} 
+            disablePadding
+            onClick={handleDrawerToggle}
+          >
+            <ListItemText 
+              primary={item} 
+              primaryTypographyProps={{
+                className: "text-2xl font-bold uppercase tracking-widest hover:text-cyan-400 transition-colors"
+              }}
+            />
+          </ListItem>
+        ))}
+      </List>
+      
+      <Box className="mt-auto pt-10">
+        <Button 
+          fullWidth 
+          variant="contained"
+          className="bg-gradient-to-r from-cyan-500 to-purple-600 rounded-xl py-3 font-bold"
+        >
+          Connect Wallet
+        </Button>
+      </Box>
+    </Box>
+  );
 
   return (
     <AppBar 
@@ -51,12 +109,12 @@ function Header() {
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar sx={{ justifyContent: 'space-between', py: 1, px: { xs: 0 } }}>
+        <Toolbar sx={{ justifyContent: 'space-between', py: { xs: 1.5, md: 2 }, px: { xs: 0 } }}>
           {/* LOGO AREA */}
           <Typography 
             variant="h5" 
             component="div" 
-            className="font-black tracking-tighter cursor-pointer"
+            className="font-black tracking-tighter cursor-pointer text-2xl md:text-3xl"
             sx={{ 
               background: 'linear-gradient(to right, #22d3ee, #3b82f6, #a855f7)',
               WebkitBackgroundClip: 'text',
@@ -100,48 +158,34 @@ function Header() {
 
           {/* USER ACTIONS */}
           <Box className="flex items-center gap-2">
-            {auth && (
-              <div>
-             
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                  keepMounted
-                  transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                  slotProps={{
-                    paper: {
-                      sx: {
-                        bgcolor: 'rgba(10, 15, 30, 0.95)',
-                        backdropFilter: 'blur(10px)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        color: 'white',
-                        mt: 1.5,
-                        minWidth: 150
-                      }
-                    }
-                  }}
-                >
-                  <MenuItem onClick={handleClose} className="hover:bg-white/5 py-3">Profile</MenuItem>
-                  <MenuItem onClick={handleClose} className="hover:bg-white/5 py-3">Settings</MenuItem>
-                  <Box className="h-[1px] bg-white/10 my-1" />
-                  <MenuItem onClick={handleClose} className="text-red-400 hover:bg-red-500/10 py-3">Logout</MenuItem>
-                </Menu>
-              </div>
-            )}
+          
 
             <IconButton
               size="large"
               edge="end"
-              className="text-white md:hidden"
+              className="text-white md:hidden ml-2"
+              onClick={handleDrawerToggle}
             >
               <MenuIcon />
             </IconButton>
           </Box>
         </Toolbar>
       </Container>
+      
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '100%', maxWidth: '300px' },
+        }}
+      >
+        {drawer}
+      </Drawer>
     </AppBar>
   );
 }

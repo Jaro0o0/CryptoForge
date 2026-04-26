@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
@@ -8,8 +9,11 @@ import FlashOnIcon from "@mui/icons-material/FlashOn";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import LayersIcon from "@mui/icons-material/Layers";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import { Canvas } from "@react-three/fiber";
+import ETH from "../ETH/ETH";
 
 const whyData = [
+  // ... (dane pozostają bez zmian)
   {
     title: "Connect your wallet",
     desc: "Use Trust Wallet, Metamask or any other wallet to connect to our platform.",
@@ -43,15 +47,15 @@ const whyData = [
 ];
 
 const FeatureItem = ({ title, desc, icon }) => (
-  <Box className="flex gap-4 group">
-    <Box className="flex h-fit justify-center items-center bg-gradient-to-r from-cyan-500 to-purple-500 p-4 rounded-xl shadow-lg shadow-cyan-500/20 group-hover:scale-110 transition-transform duration-300">
+  <Box className="flex gap-4 group items-center md:items-start text-center md:text-left flex-col md:flex-row">
+    <Box className="flex h-fit justify-center items-center bg-gradient-to-r from-cyan-500 to-purple-500 p-3 md:p-4 rounded-xl shadow-lg shadow-cyan-500/20 group-hover:scale-110 transition-transform duration-300">
       {icon}
     </Box>
     <Box>
-      <Typography variant="h5" component="h2" className="font-bold text-white mb-1">
+      <Typography variant="h5" component="h2" className="font-bold text-white mb-1 text-lg md:text-xl">
         {title}
       </Typography>
-      <Typography component="p" className="text-gray-400 text-sm leading-relaxed">
+      <Typography component="p" className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
         {desc}
       </Typography>
     </Box>
@@ -59,40 +63,48 @@ const FeatureItem = ({ title, desc, icon }) => (
 );
 
 const WhyChooseUs = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <section className="py-[95px] px-0 bg-gray-950">
+    <section className="py-16 md:py-24 px-0 bg-gray-950">
       <Container>
         <Typography
           variant="h2"
           component="h3"
           align="center"
-          className="font-bold text-white mb-16 uppercase tracking-wider"
+          className="font-black text-white mb-12 md:mb-16 uppercase tracking-wider text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
         >
           Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Choose Us</span>
         </Typography>
 
-        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <Box className="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-16 items-center">
           {/* Left Column */}
-          <Box className="flex flex-col gap-12 order-2 md:order-1">
+          <Box className="flex flex-col gap-10 md:gap-12 order-2 lg:order-1">
             {whyData.slice(0, 3).map((item, index) => (
               <FeatureItem key={index} {...item} />
             ))}
           </Box>
 
-          {/* Image Box */}
-          <Box className="relative flex justify-center items-center h-[300px] md:h-[500px] order-1 md:order-2">
-            <Box className="absolute w-[80%] h-[80%] bg-purple-500/20 blur-[100px] rounded-full" />
-            <Image
-              src="/imgs/why-img.png"
-              alt="Why choose us"
-              fill
-              style={{ objectFit: "contain" }}
-              className="hover:scale-105 transition-transform duration-700 z-10"
-            />
+          {/* 3D Model Box */}
+          <Box className="relative flex justify-center items-center h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] order-1 lg:order-2">
+            <Box className="absolute w-[80%] h-[80%] bg-purple-500/20 blur-[60px] md:blur-[100px] rounded-full animate-pulse" />
+            <Box className="w-full h-full z-10">
+              {mounted && (
+                <Canvas camera={{ position: [0, 0, 7], fov: 90 }}>
+                  <ambientLight intensity={0.5} />
+                  <pointLight position={[10, 10, 10]} />
+                  <ETH />
+                </Canvas>
+              )}
+            </Box>
           </Box>
 
           {/* Right Column */}
-          <Box className="flex flex-col gap-12 order-3">
+          <Box className="flex flex-col gap-10 md:gap-12 order-3">
             {whyData.slice(3).map((item, index) => (
               <FeatureItem key={index} {...item} />
             ))}
@@ -104,3 +116,4 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
+
