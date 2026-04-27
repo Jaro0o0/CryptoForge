@@ -85,12 +85,12 @@ const HeroInner = () => {
       />
 
       <Container maxWidth="lg" className="relative z-10 pt-10 md:pt-20">
-        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col text-center lg:text-left items-center lg:items-start"
+            className="flex flex-col text-center lg:text-left items-center lg:items-start h-full"
           >
             {/* NAVIGATION BAR  */}
             <motion.div variants={itemVariants} className="mb-8 md:mb-12 w-full max-w-md lg:max-w-none">
@@ -144,111 +144,113 @@ const HeroInner = () => {
             </motion.div>
 
             {/* CONTENT AREA */}
-            <AnimatePresence mode="wait">
-              {view === 'home' && (
-                <motion.div
-                  key="home"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="flex flex-col items-center lg:items-start"
-                >
-                  <Typography 
-                    variant="h1" 
-                    className='text-white font-black tracking-tighter mb-4'
-                    sx={{ fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' }, lineHeight: 1.1 }}
-                    gutterBottom
+            <Box className="flex-1 flex flex-col justify-center w-full items-center lg:items-start">
+              <AnimatePresence mode="wait">
+                {view === 'home' && (
+                  <motion.div
+                    key="home"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="flex flex-col items-center lg:items-start"
                   >
-                    Forge Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Crypto</span> Future
-                  </Typography>
-                  <Typography 
-                    className='text-gray-400 max-w-md text-base md:text-xl leading-relaxed mb-8 md:mb-12'
-                    gutterBottom
-                  >
-                    Step into the next generation of finance. Trade with precision, 
-                    invest with clarity, and dominate the market with CryptoForge.
-                  </Typography>
-                  <Box className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
-                    <Button 
-                      variant="contained" 
-                      className="rounded-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform font-bold text-base shadow-lg shadow-cyan-500/20"
+                    <Typography 
+                      variant="h1" 
+                      className='text-white font-black tracking-tighter mb-4'
+                      sx={{ fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' }, lineHeight: 1.1 }}
+                      gutterBottom
                     >
-                      Get Started
-                    </Button>
-                    <Button 
-                      variant="outlined" 
-                      sx={{
-                        px: 4,
-                        py: 1.5,
-                        borderColor: 'rgba(6, 182, 212, 0.3)',
-                        color: '#22d3ee',
-                        fontSize: '1rem',
-                        fontWeight: 'bold',
-                        textTransform: 'none',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          borderColor: '#22d3ee',
-                          bgcolor: 'rgba(6, 182, 212, 0.05)',
-                        }
-                      }}
+                      Forge Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Crypto</span> Future
+                    </Typography>
+                    <Typography 
+                      className='text-gray-400 max-w-md text-base md:text-xl leading-relaxed mb-8 md:mb-12'
+                      gutterBottom
                     >
-                      Learn More
-                    </Button>
-                  </Box>
-                </motion.div>
-              )}
+                      Step into the next generation of finance. Trade with precision, 
+                      invest with clarity, and dominate the market with CryptoForge.
+                    </Typography>
+                    <Box className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
+                      <Button 
+                        variant="contained" 
+                        className="rounded-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform font-bold text-base shadow-lg shadow-cyan-500/20"
+                      >
+                        Get Started
+                      </Button>
+                      <Button 
+                        variant="outlined" 
+                        sx={{
+                          px: 4,
+                          py: 1.5,
+                          borderColor: 'rgba(6, 182, 212, 0.3)',
+                          color: '#22d3ee',
+                          fontSize: '1rem',
+                          fontWeight: 'bold',
+                          textTransform: 'none',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            borderColor: '#22d3ee',
+                            bgcolor: 'rgba(6, 182, 212, 0.05)',
+                          }
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </Box>
+                  </motion.div>
+                )}
 
-              {view === 'news' && (
-                <motion.div
-                  key="news"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="text-white w-full"
-                >
-                  <Typography variant="h3" className="font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 text-3xl md:text-4xl">Market Insights</Typography>
-                  <Box className="space-y-4">
-                    {[1, 2, 3].map((i) => (
-                      <Box key={i} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 transition-colors cursor-pointer text-left">
-                        <Typography className="text-cyan-400 text-xs font-bold uppercase mb-1">Trending</Typography>
-                        <Typography className="font-semibold text-base md:text-lg">Bitcoin Hits New Yearly High as Adoption Surges</Typography>
-                      </Box>
+                {view === 'news' && (
+                  <motion.div
+                    key="news"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="text-white w-full"
+                  >
+                    <Typography variant="h3" className="font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 text-3xl md:text-4xl">Market Insights</Typography>
+                    <Box className="space-y-4">
+                      {[1, 2, 3].map((i) => (
+                        <Box key={i} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 transition-colors cursor-pointer text-left">
+                          <Typography className="text-cyan-400 text-xs font-bold uppercase mb-1">Trending</Typography>
+                          <Typography className="font-semibold text-base md:text-lg">Bitcoin Hits New Yearly High as Adoption Surges</Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </motion.div>
+                )}
+
+                {view === 'popular' && (
+                  <motion.div
+                    key="popular"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className='grid grid-cols-1 sm:grid-cols-2 gap-4 w-full'
+                  >
+                    {[
+                      { data: btcData, label: 'BTC' },
+                      { data: ethData, label: 'ETH' },
+                      { data: solData, label: 'SOL' }
+                    ].map((coin, idx) => (
+                      <CoinBox key={idx}>
+                        <Box className='flex items-center gap-4'>
+                          <Box className="p-2 bg-white/5 rounded-lg border border-white/5 group-hover:border-cyan-500/30 transition-colors">
+                            {coin.data?.image && <img src={coin.data.image} alt={coin.label} className="w-6 h-6 md:w-8 md:h-8" />}
+                          </Box>
+                          <Box className="text-left">
+                            <Typography className="text-gray-400 text-[10px] md:text-xs font-bold uppercase">{coin.label}</Typography>
+                            <Typography variant='h6' className="text-white font-bold leading-none text-sm md:text-lg">
+                              {coin.data ? `$${coin.data.current_price.toLocaleString()}` : '...'}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </CoinBox>
                     ))}
-                  </Box>
-                </motion.div>
-              )}
-
-              {view === 'popular' && (
-                <motion.div
-                  key="popular"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className='grid grid-cols-1 sm:grid-cols-2 gap-4 w-full'
-                >
-                  {[
-                    { data: btcData, label: 'BTC' },
-                    { data: ethData, label: 'ETH' },
-                    { data: solData, label: 'SOL' }
-                  ].map((coin, idx) => (
-                    <CoinBox key={idx}>
-                      <Box className='flex items-center gap-4'>
-                        <Box className="p-2 bg-white/5 rounded-lg border border-white/5 group-hover:border-cyan-500/30 transition-colors">
-                          {coin.data?.image && <img src={coin.data.image} alt={coin.label} className="w-6 h-6 md:w-8 md:h-8" />}
-                        </Box>
-                        <Box className="text-left">
-                          <Typography className="text-gray-400 text-[10px] md:text-xs font-bold uppercase">{coin.label}</Typography>
-                          <Typography variant='h6' className="text-white font-bold leading-none text-sm md:text-lg">
-                            {coin.data ? `$${coin.data.current_price.toLocaleString()}` : '...'}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </CoinBox>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </Box>
           </motion.div>
 
           {/* 3D VISUAL AREA */}
@@ -256,7 +258,7 @@ const HeroInner = () => {
             initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="relative h-[300px] sm:h-[400px] md:h-[550px] w-full flex justify-center items-center mt-0 lg:mt-0 order-first lg:order-last"
+            className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-auto w-full flex justify-center items-center mt-0 lg:mt-0 order-first lg:order-last"
           >
             <Box className="absolute w-[70%] h-[70%] bg-cyan-500/20 blur-[80px] md:blur-[120px] rounded-full animate-pulse pointer-events-none" />
             <Box className="absolute w-[50%] h-[50%] bg-purple-500/15 blur-[60px] md:blur-[100px] rounded-full delay-700 animate-pulse pointer-events-none" />

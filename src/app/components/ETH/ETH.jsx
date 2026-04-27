@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { Center } from "@react-three/drei";
 import { Logo } from "../Logo/Ethereum_logo";
 
 function ETH() {
@@ -20,10 +21,11 @@ function ETH() {
             <pointLight position={[10, 10, 10]} intensity={1.5} />
             <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
             
-            {/* Reduced scale from 3.5 to 2.8 to fit better */}
-            <group ref={logoRef} scale={2.8}>
-                <Logo />
-            </group>
+            <Center>
+                <group ref={logoRef} scale={3.6}>
+                    <Logo />
+                </group>
+            </Center>
         </>
     );
 }

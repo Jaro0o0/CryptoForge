@@ -95,8 +95,6 @@ const WhyChooseUs = () => {
             <Box className="w-full h-full z-10">
               {mounted && (
                 <Canvas camera={{ position: [0, 0, 7], fov: 90 }}>
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[10, 10, 10]} />
                   <ETH />
                 </Canvas>
               )}
