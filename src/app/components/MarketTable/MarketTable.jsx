@@ -73,7 +73,7 @@ const MarketTable = () => {
   );
 
   return (
-    <section className="py-16 md:py-24 px-0 bg-gray-950 relative overflow-hidden">
+    <section id="Market" className="py-16 md:py-24 px-0 bg-gray-950 relative overflow-hidden">
       {/* GRADIENT BLOBS */}
       <div className="absolute top-1/4 left-0 w-64 md:w-96 h-64 md:h-96 bg-cyan-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-64 md:w-96 h-64 md:h-96 bg-purple-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
@@ -83,7 +83,8 @@ const MarketTable = () => {
           variant="h2"
           component="h3"
           align="center"
-          className="font-black text-white mb-10 md:mb-16 uppercase tracking-wider text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+          sx={{ fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' }, lineHeight: 1.1 }}
+          className="font-black text-white !mb-10 uppercase tracking-wider   "
         >
           Today's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Crypto Prices</span>
         </Typography>
@@ -106,10 +107,10 @@ const MarketTable = () => {
           <Table sx={{ minWidth: { xs: 800, md: 900 } }}>
             <TableHead className="bg-white/5">
               <TableRow>
-                <TableCell className="text-white font-bold border-white/10 py-4 md:py-6">Coin</TableCell>
-                <TableCell align="right" className="text-white font-bold border-white/10 py-4 md:py-6">Price</TableCell>
-                <TableCell align="right" className="text-white font-bold border-white/10 py-4 md:py-6">24h Change</TableCell>
-                <TableCell align="right" className="text-white font-bold border-white/10 py-4 md:py-6">Market Cap</TableCell>
+                <TableCell className="!text-white !font-bold !border-white/10 py-4 md:py-6">Coin</TableCell>
+                <TableCell align="right" className="!text-white !font-bold !border-white/10 py-4 md:py-6">Price</TableCell>
+                <TableCell align="right" className="!text-white !font-bold !border-white/10 py-4 md:py-6">24h Change</TableCell>
+                <TableCell align="right" className="!text-white !font-bold !border-white/10 py-4 md:py-6">Market Cap</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

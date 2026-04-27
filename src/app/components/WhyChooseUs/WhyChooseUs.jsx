@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 px-0 bg-gray-950">
+    <section id="Choose Us" className="py-16 md:py-24 px-0 bg-gray-950">
       <Container>
         <Typography
           variant="h2"

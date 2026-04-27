@@ -65,7 +65,7 @@ const HeroInner = () => {
   };
 
   return (
-    <section className="w-full min-h-screen bg-gray-950 relative overflow-hidden flex items-center py-20 md:py-0">
+    <section id="Home" className="w-full min-h-screen bg-gray-950 relative overflow-hidden flex items-center py-20 md:py-0">
       {/* GRADIENT BLOBS */}
       <motion.div 
         animate={{ 
@@ -105,7 +105,7 @@ const HeroInner = () => {
                 }}
               >
                 <Toolbar className="justify-center px-2 md:px-4">
-                  {/* BUTTONS */}
+                  {/* NAVS_BUTTONS */}
                   <Box className='flex justify-center gap-1 md:gap-6'>
                     {['home', 'news', 'popular'].map((v) => (
                       <Button 
@@ -135,7 +135,7 @@ const HeroInner = () => {
                           }
                         }}
                       >
-                        {v === 'popular' ? 'Popular' : v}
+                        {v}
                       </Button>
                     ))}
                   </Box>
@@ -164,6 +164,7 @@ const HeroInner = () => {
                   </Typography>
                   <Typography 
                     className='text-gray-400 max-w-md text-base md:text-xl leading-relaxed mb-8 md:mb-12'
+                    gutterBottom
                   >
                     Step into the next generation of finance. Trade with precision, 
                     invest with clarity, and dominate the market with CryptoForge.
@@ -180,7 +181,6 @@ const HeroInner = () => {
                       sx={{
                         px: 4,
                         py: 1.5,
-                        borderRadius: '9999px',
                         borderColor: 'rgba(6, 182, 212, 0.3)',
                         color: '#22d3ee',
                         fontSize: '1rem',
