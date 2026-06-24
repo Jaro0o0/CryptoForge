@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Box, Container, Typography } from "@mui/material";
-import Image from "next/image";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import SecurityIcon from "@mui/icons-material/Security";
 import FlashOnIcon from "@mui/icons-material/FlashOn";

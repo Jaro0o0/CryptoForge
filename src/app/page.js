@@ -2,10 +2,11 @@
 
 import { Container, Typography } from "@mui/material";
 
-import HeroInner from "./components/HeroInner/HeroInner";
-import MarketTable from "./components/MarketTable/MarketTable";
-import JoinUs from "./components/JoinUs/JoinUs";
-import WhyChooseUs from "./components/WhyChooseUs/WhyChooseUs";
+import HeroInner from "../components/HeroInner/HeroInner";
+import MarketTable from "../components/MarketTable/MarketTable";
+import JoinUs from "../components/JoinUs/JoinUs";
+import WhyChooseUs from "../components/WhyChooseUs/WhyChooseUs";
+import MobileApp from "../components/MobileApp/MobileApp";
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
 
         {/* WHY */}
         <WhyChooseUs />
+
+        <MobileApp/>
 
         {/* JOIN_US Component */}
         <JoinUs />

@@ -1,5 +1,5 @@
 export async function getData(params) {
-    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&page=1'
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=30&page=1&x_cg_demo_api_key=${process.env.API_KEY}`
     
     try {
         const response = await fetch(url)
