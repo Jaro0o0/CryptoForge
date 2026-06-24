@@ -3,10 +3,13 @@
 import { Container, Typography } from "@mui/material";
 
 import HeroInner from "../components/HeroInner/HeroInner";
-import MarketTable from "../components/MarketTable/MarketTable";
+import CryptoPricesTable from "@/components/CryptoPricesTable/CryptoPricesTable";
 import JoinUs from "../components/JoinUs/JoinUs";
 import WhyChooseUs from "../components/WhyChooseUs/WhyChooseUs";
 import MobileApp from "../components/MobileApp/MobileApp";
+
+
+
 
 export default function Home() {
   return (
@@ -14,7 +17,8 @@ export default function Home() {
         <HeroInner/>
         
         {/* Table Section */}
-        <MarketTable />
+        <CryptoPricesTable/>
+  
 
         {/* WHY */}
         <WhyChooseUs />

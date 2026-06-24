@@ -74,9 +74,11 @@ const WhyChooseUs = () => {
 
       {/* TEXT_BOX */}
       <div>
+          {/* SUBHEADING */}
            <span className=" inline-block text-xs font-semibold uppercase tracking-wider text-sky-400 bg-sky-500/10 border border-sky-500/20 rounded-full px-4 py-1.5 mb-6">
               Why choose us
           </span>
+          {/* HEAADING */}
         <Typography
           variant="h2"
           component="h3"
