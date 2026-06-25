@@ -2,8 +2,7 @@
 
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import ETH from "../../../ETH/ETH";
+import ETHCanvas from "../../../ETH/ETHCanvas";
 
 const ThreeScene = () => {
   return (
@@ -38,9 +37,7 @@ const ThreeScene = () => {
       />
 
       <div className="absolute inset-0">
-        <Canvas camera={{ position: [0, 0, 7], fov: 75 }}>
-          <ETH />
-        </Canvas>
+        <ETHCanvas camera={{ position: [0, 0, 7], fov: 75 }} className="w-full h-full" />
       </div>
     </motion.div>
   );

@@ -1,6 +1,5 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import SecurityIcon from "@mui/icons-material/Security";
@@ -8,13 +7,8 @@ import FlashOnIcon from "@mui/icons-material/FlashOn";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import LayersIcon from "@mui/icons-material/Layers";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import { Canvas } from "@react-three/fiber";
-import ETH from "../ETH/ETH";
+import LazyETHCanvas from "../ETH/LazyETHCanvas";
 import FeatureItem from "../common/FeatureItem/FeatureItem";
-
-const subscribe = () => () => {};
-const getSnapshot = () => true;
-const getServerSnapshot = () => false;
 
 const whyData = [
 
@@ -51,8 +45,6 @@ const whyData = [
 ];
 
 const WhyChooseUs = () => {
-  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-
   return (
     <>
       <Container>
@@ -87,11 +79,7 @@ const WhyChooseUs = () => {
           <Box className="relative h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] order-1 lg:order-2">
             <Box className="absolute w-[80%] h-[80%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500/20 blur-[60px] md:blur-[100px] rounded-full animate-pulse" />
             <Box className="absolute inset-0 z-10">
-              {mounted && (
-                <Canvas camera={{ position: [0, 0, 7], fov: 90 }}>
-                  <ETH />
-                </Canvas>
-              )}
+              <LazyETHCanvas camera={{ position: [0, 0, 7], fov: 90 }} className="w-full h-full" />
             </Box>
           </Box>
 

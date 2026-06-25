@@ -12,8 +12,10 @@ import PopularView from './Views/PopularView';
 const ThreeScene = dynamic(() => import('./ThreeScene/ThreeScene'), {
   ssr: false,
   loading: () => (
-    <Box className="w-full min-h-[400px] rounded-3xl bg-white/[0.02] border border-white/5 animate-pulse" />
-  )
+    <Box className="relative h-[300px] sm:h-[450px] md:h-[600px] lg:h-[550px] w-full order-first lg:order-last">
+      <Box className="absolute inset-0 rounded-3xl bg-white/[0.02] border border-white/5 animate-pulse" />
+    </Box>
+  ),
 });
 
 const containerVariants = {

@@ -1,12 +1,15 @@
-"use client" 
+"use client"
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Center, useGLTF } from "@react-three/drei";
+import { ETH_MODEL_PATH } from "./constants";
+
+useGLTF.preload(ETH_MODEL_PATH);
 
 function ETH() {
     const logoRef = useRef();
-    const { nodes, materials } = useGLTF('/models/ethereum_logo.glb');
+    const { nodes, materials } = useGLTF(ETH_MODEL_PATH);
 
     useFrame((state, delta) => {
         if (logoRef.current) {

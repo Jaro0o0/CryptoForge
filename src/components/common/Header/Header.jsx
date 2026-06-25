@@ -13,6 +13,11 @@ import Link from 'next/link';
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +28,8 @@ function Header() {
   }, []);
 
   const navItems = ['Home', 'Market', 'Choose Us', 'About Us'];
+
+  if (!mounted) return null;
 
   return (
     <AppBar 

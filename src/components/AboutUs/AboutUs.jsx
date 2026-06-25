@@ -1,14 +1,8 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { Container, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import ETH from "../ETH/ETH";
-
-const subscribe = () => () => {};
-const getSnapshot = () => true;
-const getServerSnapshot = () => false;
+import LazyETHCanvas from "../ETH/LazyETHCanvas";
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0, rotate: -180 },
@@ -23,7 +17,6 @@ const stats = [
 ];
 
 const AboutUs = () => {
-  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   return (
     <Box className="flex flex-col items-center w-full flex-1">
       <Container maxWidth="lg" className="relative z-20 flex-1 flex flex-col justify-center">
@@ -44,12 +37,8 @@ const AboutUs = () => {
                   CryptoForge
                 </Typography>
                 <Box className="w-10 h-10 sm:w-24 sm:h-24 md:w-32 md:h-32 shrink-0" sx={{ position: "relative", overflow: "hidden" }}>
-                {mounted && (
-                  <Canvas camera={{ position: [0, 0, 7], fov: 80 }} style={{ width: "100%", height: "100%" }}>
-                    <ETH />
-                  </Canvas>
-                )}
-              </Box>
+                  <LazyETHCanvas camera={{ position: [0, 0, 7], fov: 80 }} className="absolute inset-0" />
+                </Box>
             </Box>
 
             <Typography
