@@ -7,7 +7,7 @@ const footerLinks = [
   { label: "Home", href: "#Home" },
   { label: "Market", href: "#Market" },
   { label: "Choose Us", href: "#Choose Us" },
-  { label: "Join", href: "#Join" },
+  { label: "About US", href: "#About Us" },
 ];
 
 const socialIcons = [

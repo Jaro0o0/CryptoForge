@@ -24,7 +24,6 @@ const stats = [
 
 const AboutUs = () => {
   const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-
   return (
     <Box className="flex flex-col items-center w-full flex-1">
       <Container maxWidth="lg" className="relative z-20 flex-1 flex flex-col justify-center">
@@ -88,7 +87,8 @@ const AboutUs = () => {
         </Box>
       </Container>
 
-      <Box className="flex flex-col items-center gap-3 md:gap-6 z-20 w-full px-4 pb-8 md:pb-12">
+      {/* SVG */}
+      <Box className="flex flex-col items-center gap-3 md:gap-6 z-20 w-full px-4 pb-8 md:pb-12 md:pt-12">
         <Box className="flex gap-3 md:gap-6">
           {[
             {

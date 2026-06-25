@@ -1,11 +1,13 @@
-"use client" 
+"use client"
 
+import dynamic from "next/dynamic";
 import Section from "@/components/common/Section/Section";
-import Hero from "../components/Hero/Hero";
 import CryptoPricesTable from "@/components/CryptoPricesTable/CryptoPricesTable";
-import AboutUs from "../components/AboutUs/AboutUs";
-import WhyChooseUs from "../components/WhyChooseUs/WhyChooseUs";
 import MobileApp from "../components/MobileApp/MobileApp";
+
+const Hero = dynamic(() => import("../components/Hero/Hero"), { ssr: false });
+const AboutUs = dynamic(() => import("../components/AboutUs/AboutUs"), { ssr: false });
+const WhyChooseUs = dynamic(() => import("../components/WhyChooseUs/WhyChooseUs"), { ssr: false });
 
 export default function Home() {
   return (
