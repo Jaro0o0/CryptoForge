@@ -9,45 +9,41 @@ const itemVariants = {
 };
 
 const NavBar = ({ view, setView }) => (
-  <motion.div variants={itemVariants} className="mb-8 md:mb-12 w-full max-w-md lg:max-w-none">
+  <motion.div variants={itemVariants} className="mb-6 md:mb-8 w-full">
     <AppBar
       position="static"
-      className='backdrop-blur-xl rounded-2xl'
+      className='rounded-2xl'
       sx={{
-        backgroundColor: 'rgba(255, 255, 255, 0.02)',
-        border: '1px solid rgba(255, 255, 255, 0.05)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+        background: 'rgba(255, 255, 255, 0.03)',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
+        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(16px)',
         backgroundImage: 'none'
       }}
     >
-      <Toolbar className="justify-center px-2 md:px-4">
-        <Box className='flex justify-center gap-1 md:gap-6'>
+      <Toolbar className="justify-center px-2 md:px-4 min-h-[48px] md:min-h-[56px]">
+        <Box className='flex justify-center gap-1 md:gap-2 w-full'>
           {['home', 'news', 'popular'].map((v) => (
             <Button
               key={v}
               onClick={() => setView(v)}
               sx={{
                 position: 'relative',
-                color: 'white',
-                fontSize: { xs: '0.85rem', md: '1.05rem' },
-                minWidth: { xs: 'auto', md: '64px' },
-                px: { xs: 1.5, md: 2 },
+                color: view === v ? 'white' : 'rgba(255, 255, 255, 0.5)',
+                fontSize: { xs: '0.8rem', md: '0.95rem' },
+                fontWeight: view === v ? 600 : 400,
+                minWidth: { xs: 'auto', md: '80px' },
+                px: { xs: 2, md: 3 },
+                py: 0.5,
                 textTransform: 'capitalize',
+                letterSpacing: '0.02em',
+                borderRadius: '10px',
+                transition: 'all 0.3s ease',
+                background: view === v ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
                 '&:hover': {
-                  '&:after': {
-                    width: '100%',
-                  }
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  color: 'white',
                 },
-                '&:after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: -4,
-                  left: 0,
-                  width: view === v ? '100%' : '0%',
-                  height: '2px',
-                  background: 'linear-gradient(to right, #22d3ee, #a855f7)',
-                  transition: 'width 0.3s ease',
-                }
               }}
             >
               {v}

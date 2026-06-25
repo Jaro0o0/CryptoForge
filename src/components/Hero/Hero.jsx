@@ -14,7 +14,7 @@ const Hero = () => {
   const solData = data?.find(coin => coin.id === 'solana');
 
   return (
-    <section id="Home" className="w-full min-h-screen bg-gray-950 relative overflow-hidden flex items-center py-20 md:py-0">
+    <>
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
@@ -35,7 +35,7 @@ const Hero = () => {
       <Container maxWidth="lg" className="relative z-10 pt-10 md:pt-20">
         <HeroInner btcData={btcData} ethData={ethData} solData={solData} />
       </Container>
-    </section>
+    </>
   );
 };
 

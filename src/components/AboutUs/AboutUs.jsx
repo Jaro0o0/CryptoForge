@@ -1,46 +1,32 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Container, Box, Typography, Button } from "@mui/material";
-import Image from "next/image";
+import { useSyncExternalStore } from "react";
+import { Container, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import ETH from "../ETH/ETH";
 
-const svgVariants = {
-  hidden: {
-    rotate: -180,
-  },
-  visible: {
-    rotate: 0,
-    transition: { duration: 1 },
-  },
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
+const containerVariants = {
+  hidden: { opacity: 0, scale: 0, rotate: -180 },
+  visible: { opacity: 1, scale: 1, rotate: 0, transition: { duration: 0.8 } },
 };
 
-const pathVariants = {
-  hidden: {
-    opacity: 0,
-    pathLength: 0,
-  },
-  visible: {
-    opacity: 1,
-    pathLength: 1,
-    transition: {
-      duration: 2,
-      ease: "easeInOut",
-    },
-  },
-};
+const stats = [
+  { value: "250+", label: "Cryptocurrencies" },
+  { value: "$2B+", label: "Trading Volume" },
+  { value: "50K+", label: "Active Users" },
+  { value: "99.9%", label: "Uptime" },
+];
 
-const JoinUs = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+const AboutUs = () => {
+  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return (
-    <section id="Join" className="w-full min-h-screen py-20 md:py-32 px-0 relative overflow-hidden flex flex-col justify-center bg-gray-950 text-white">
+    <>
       <Container maxWidth="lg" className="relative z-20">
         <Box className="flex flex-col items-center text-center gap-6 md:gap-8">
           <Box>
@@ -48,7 +34,7 @@ const JoinUs = () => {
               variant="h1"
               className="font-black tracking-tighter text-5xl sm:text-7xl md:text-8xl lg:text-9xl mb-2"
             >
-              JOIN US
+              ABOUT US
             </Typography>
 
             <Box className="flex items-center justify-center gap-2 md:gap-4">
@@ -56,9 +42,8 @@ const JoinUs = () => {
                 variant="h2"
                 className="font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500"
               >
-                Discord
+                CryptoForge
               </Typography>
-              {/* ETHERIUM_3D */}
               <Box className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32">
                 {mounted && (
                   <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
@@ -70,24 +55,39 @@ const JoinUs = () => {
 
             <Typography
               variant="body1"
-              className="text-gray-400 text-base md:text-xl mt-6 max-w-md mx-auto px-4 md:px-0"
+              className="text-gray-400 text-base md:text-xl mt-6 max-w-2xl mx-auto px-4 md:px-0"
             >
-              Invest and manage your crypto at one place. Join our community to
-              stay updated with the latest trends.
+              We provide real-time crypto market data, advanced analytics, and portfolio tracking tools. 
+              Our mission is to make cryptocurrency accessible to everyone through intuitive design 
+              and powerful insights.
             </Typography>
           </Box>
 
-          <Button
-            variant="contained"
-            size="large"
-            className="rounded-full px-8 md:px-12 py-3 md:py-4 text-base md:text-lg font-bold bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/20"
-          >
-            Join Discord
-          </Button>
+          <Box className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-3xl mt-4">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex flex-col items-center p-4 md:p-6 rounded-xl bg-white/[0.02] border border-white/5 backdrop-blur-sm"
+              >
+                <Typography
+                  variant="h3"
+                  className="font-black text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500"
+                >
+                  {stat.value}
+                </Typography>
+                <Typography variant="body2" className="text-gray-500 text-xs md:text-sm mt-1">
+                  {stat.label}
+                </Typography>
+              </motion.div>
+            ))}
+          </Box>
         </Box>
       </Container>
 
-      {/* SVGS / SOCIALS */}
       <Box className="flex flex-col items-center gap-6 absolute bottom-10 md:bottom-20 left-1/2 -translate-x-1/2 z-20 w-full px-4">
         <Box className="flex gap-4 md:gap-6">
           {[
@@ -104,23 +104,22 @@ const JoinUs = () => {
               viewBox: "0 0 16 16",
             },
           ].map((icon, index) => (
-            <motion.div
+              <motion.div
               key={index}
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
               whileHover={{ scale: 1.1, y: -5 }}
               className="flex justify-center items-center bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-white/10 p-3 md:p-4 rounded-full backdrop-blur-sm cursor-pointer hover:border-cyan-500/50 transition-colors"
             >
-              <motion.svg
-                variants={svgVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+              <svg
                 className="w-6 h-6 md:w-8 md:h-8"
-                fill="none"
-                stroke="currentColor"
+                fill="currentColor"
                 viewBox={icon.viewBox}
               >
-                <motion.path variants={pathVariants} d={icon.d} strokeWidth={index === 1 ? 0 : 1} fill={index === 1 ? "white" : "none"} />
-              </motion.svg>
+                <path d={icon.d} />
+              </svg>
             </motion.div>
           ))}
         </Box>
@@ -134,14 +133,10 @@ const JoinUs = () => {
         </Box>
       </Box>
 
-
-
-      {/* GRADIENT BLOBS */}
       <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-cyan-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-500/10 rounded-full blur-[80px] md:blur-[128px] pointer-events-none" />
-    </section>
+    </>
   );
 };
 
-export default JoinUs;
-
+export default AboutUs;

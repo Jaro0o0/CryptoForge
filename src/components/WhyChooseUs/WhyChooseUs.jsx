@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import SecurityIcon from "@mui/icons-material/Security";
@@ -11,6 +11,10 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { Canvas } from "@react-three/fiber";
 import ETH from "../ETH/ETH";
 import FeatureItem from "../common/FeatureItem/FeatureItem";
+
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 const whyData = [
 
@@ -47,14 +51,10 @@ const whyData = [
 ];
 
 const WhyChooseUs = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return (
-    <section id="Choose Us" className="py-16 md:py-24 px-0 bg-gray-950">
+    <>
       <Container>
 
       {/* TEXT_BOX */}
@@ -103,9 +103,8 @@ const WhyChooseUs = () => {
           </Box>
         </Box>
       </Container>
-    </section>
+    </>
   );
 };
 
 export default WhyChooseUs;
-

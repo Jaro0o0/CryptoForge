@@ -22,7 +22,7 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = ['Home', 'Market', 'Choose Us', 'Join'];
+  const navItems = ['Home', 'Market', 'Choose Us', 'About Us'];
 
   return (
     <AppBar 
