@@ -1,11 +1,13 @@
+'use client';
 
+import { useState, useEffect } from "react";
 
 
 
 const cards = [
   {
     icon: (
-      <svg className="w-5 h-5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
@@ -14,7 +16,7 @@ const cards = [
   },
   {
     icon: (
-      <svg className="w-5 h-5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
       </svg>
     ),
@@ -23,7 +25,7 @@ const cards = [
   },
   {
     icon: (
-      <svg className="w-5 h-5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
       </svg>
     ),
@@ -33,22 +35,45 @@ const cards = [
 ];
 
 function MobileApp() {
+
+  const [time , setTime] = useState('');
+
+  useEffect(()=>{
+
+    const time = ()=>{
+
+      const now = new Date();
+      setTime(now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }));
+
+
+    }
+    time();
+    const interval = setInterval(time, 60000)
+
+    return () => clearInterval(interval)
+  }
+  
+  
+  ,[])
+
+
+
   return (
     <section className="py-24 bg-gray-950 relative overflow-hidden">
       {/* Decorative background glows */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 bg-sky-200 rounded-full blur-3xl opacity-30 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-indigo-200 rounded-full blur-3xl opacity-30 pointer-events-none" />
+      <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-400 rounded-full blur-3xl opacity-20 pointer-events-none" />
+      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 pointer-events-none" />
 
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl overflow-hidden">
+        <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-purple-950 rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl overflow-hidden">
           {/* Subtle radial glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.12),transparent_50%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(6,182,212,0.12),transparent_50%)] pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             {/* TEXT BOX & FEATURES */}
             <div className="lg:col-span-7 flex flex-col justify-center">
               {/* SUBTITLE */}
-              <span className="self-start inline-block text-xs font-semibold uppercase tracking-wider text-sky-400 bg-sky-500/10 border border-sky-500/20 rounded-full px-4 py-1.5 mb-6">
+              <span className="self-start inline-block text-xs font-semibold uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-4 py-1.5 mb-6">
                 Mobile Experience
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
@@ -65,11 +90,11 @@ function MobileApp() {
                     key={index}
                     className="flex flex-col gap-3 p-5 rounded-2xl border border-slate-800/80 bg-slate-900/50 hover:bg-slate-900/85 hover:border-slate-700/50 transition duration-300 group shadow-md"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-950/60 border border-sky-800/30 group-hover:scale-110 transition duration-300">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-950/60 border border-cyan-800/30 group-hover:scale-110 transition duration-300">
                       {card.icon}
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold text-white group-hover:text-sky-300 transition duration-300">
+                      <h3 className="text-base font-semibold text-white group-hover:text-cyan-300 transition duration-300">
                         {card.title}
                       </h3>
                       <p className="mt-1.5 text-xs leading-normal text-slate-400">
@@ -123,35 +148,40 @@ function MobileApp() {
             {/* PHONE MOCKUP COLUMN */}
             <div className="lg:col-span-5 flex justify-center">
               {/* Phone Container */}
-              <div className="relative mx-auto border-8 border-slate-800 bg-slate-950 rounded-[3rem] h-[550px] w-[265px] shadow-2xl overflow-hidden ring-12 ring-slate-900/30 select-none">
-                {/* Dynamic Island */}
-                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-full z-30 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-slate-950 rounded-full absolute left-4" />
-                  <div className="w-1.5 h-1.5 bg-slate-950 rounded-full absolute right-6" />
-                </div>
+              <div className="relative mx-auto border-8 border-slate-800 bg-slate-950 rounded-[3rem] h-[570px] w-[265px] shadow-2xl overflow-hidden ring-12 ring-slate-900/30 select-none">
+                {/* Status Bar with Dynamic Island */}
+                <div className="absolute top-3 left-0 right-0 flex items-center px-6 text-[10px] text-slate-400 font-bold z-30">
+                  {/* Time - left corner */}
+                  <div className="flex-1 text-left">
+                    <span>{time}</span>
+                  </div>
 
-                {/* Status Bar */}
-                <div className="absolute top-1.5 left-0 right-0 px-6 flex justify-between items-center text-[10px] text-slate-400 font-bold z-20">
-                  <span>9:41</span>
-                  <div className="flex items-center gap-1">
-                    {/* Signal icon */}
+                  {/* Dynamic Island - centered */}
+                  <div className="w-[90px] h-[22px] bg-black rounded-full flex items-center shadow-sm flex-shrink-0">
+                    <div className="ml-[18px] w-[7px] h-[7px] rounded-full bg-[#0a0a12] border border-[#1c1c2e] flex items-center justify-center">
+                      <div className="w-[2.5px] h-[2.5px] rounded-full bg-indigo-500/25" />
+                    </div>
+                    <div className="ml-auto mr-[18px] w-[2.5px] h-[2.5px] rounded-full bg-slate-900" />
+                  </div>
+
+                  {/* Battery - right corner */}
+                  <div className="flex-1 flex justify-end items-center gap-1">
                     <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                       <path d="M12 3c-1.2 0-2.4.2-3.5.7l10.8 10.8c.5-1.1.7-2.3.7-3.5 0-4.4-3.6-8-8-8zm-8 4.7C3.2 8.8 3 10.1 3 11.5c0 5 4 9 9 9 1.4 0 2.7-.2 3.8-1L4 7.7z" />
                     </svg>
-                    {/* Battery icon */}
                     <span className="border border-slate-400 rounded-sm px-0.5 py-px text-[8px] scale-75">100%</span>
                   </div>
                 </div>
 
                 {/* Mock Application Screen */}
-                <div className="h-full flex flex-col bg-slate-900 text-white relative pt-12 overflow-hidden">
+                <div className="h-full flex flex-col bg-slate-900 text-white relative pt-16 overflow-hidden">
                   {/* App Header */}
                   <div className="px-4 py-2 border-b border-slate-800 flex justify-between items-center bg-slate-900/80 backdrop-blur-md sticky top-0 z-10">
                     <div>
                       <p className="text-[9px] text-slate-400 uppercase tracking-widest leading-none">PORTFOLIO</p>
                       <h4 className="text-xs font-bold mt-0.5">Total Balance</h4>
                     </div>
-                    <span className="text-[10px] bg-sky-500/20 text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full font-semibold">
+                    <span className="text-[10px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded-full font-semibold">
                       Live
                     </span>
                   </div>
@@ -250,25 +280,25 @@ function MobileApp() {
                     <div className="absolute top-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-xl p-2.5 flex justify-between shadow-lg">
                       <div className="text-center flex-1 border-r border-slate-800">
                         <p className="text-[8px] text-slate-400">BTC</p>
-                        <p className="text-xs font-bold mt-0.5 text-sky-400">$42,580</p>
+                        <p className="text-xs font-bold mt-0.5 text-cyan-400">$42,580</p>
                       </div>
                       <div className="text-center flex-1 border-r border-slate-800">
                         <p className="text-[8px] text-slate-400">ETH</p>
-                        <p className="text-xs font-bold mt-0.5 text-sky-400">$2,310</p>
+                        <p className="text-xs font-bold mt-0.5 text-cyan-400">$2,310</p>
                       </div>
                       <div className="text-center flex-1">
                         <p className="text-[8px] text-slate-400">SOL</p>
-                        <p className="text-xs font-bold mt-0.5 text-sky-400">$145</p>
+                        <p className="text-xs font-bold mt-0.5 text-cyan-400">$145</p>
                       </div>
                     </div>
 
                  
                   </div>
+                </div>
 
-            
-
-                  {/* Safe Area Indicator */}
-                  <div className="w-20 h-1 bg-slate-800 rounded-full mx-auto my-1.5 shrink-0 animate-float transition" />
+                {/* Safe Area Indicator */}
+                <div className="absolute bottom-3 left-0 right-0 flex justify-center pointer-events-none">
+                  <div className="w-20 h-1 bg-slate-800 rounded-full animate-float transition" />
                 </div>
               </div>
             </div>

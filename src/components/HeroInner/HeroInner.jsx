@@ -8,9 +8,6 @@ import {
   Button, 
   AppBar, 
   Toolbar, 
-  IconButton, 
-  Menu, 
-  MenuItem 
 } from "@mui/material";
 
 import { Canvas } from "@react-three/fiber";
@@ -76,6 +73,8 @@ const HeroInner = () => {
         className="absolute bottom-[-5%] right-[-5%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-500/30 rounded-full blur-[80px] md:blur-[130px] pointer-events-none" 
       />
 
+
+
       <Container maxWidth="lg" className="relative z-10 pt-10 md:pt-20">
         <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <motion.div 
@@ -84,6 +83,8 @@ const HeroInner = () => {
             animate="visible"
             className="flex flex-col text-center lg:text-left items-center lg:items-start h-full"
           >
+
+
             {/* NAVIGATION BAR  */}
             <motion.div variants={itemVariants} className="mb-8 md:mb-12 w-full max-w-md lg:max-w-none">
               <AppBar 
@@ -134,6 +135,8 @@ const HeroInner = () => {
                 </Toolbar>
               </AppBar>
             </motion.div>
+
+
 
             {/* CONTENT AREA */}
             <Box className="flex-1 flex flex-col justify-center w-full items-center lg:items-start">
@@ -245,6 +248,7 @@ const HeroInner = () => {
             </Box>
           </motion.div>
 
+
           {/* 3D VISUAL AREA */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
@@ -260,6 +264,7 @@ const HeroInner = () => {
               </Canvas>
             )}
           </motion.div>
+
         </Box>
       </Container>
     </section>
