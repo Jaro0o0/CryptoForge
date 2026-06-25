@@ -1,18 +1,14 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  AppBar,
-  Toolbar,
-} from "@mui/material";
+import { useState } from 'react';
+import { Box } from "@mui/material";
 
-import { Canvas } from "@react-three/fiber";
 import { motion, AnimatePresence } from "framer-motion";
-import ETH from "../../ETH/ETH";
-import CoinBox from '../../common/CoinBox/CoinBox';
+import NavBar from './NavBar/NavBar';
+import ThreeScene from './ThreeScene/ThreeScene';
+import HomeView from './Views/HomeView';
+import NewsView from './Views/NewsView';
+import PopularView from './Views/PopularView';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -23,18 +19,8 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 }
-};
-
 const HeroInner = ({ btcData, ethData, solData }) => {
   const [view, setView] = useState('home');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
@@ -45,190 +31,24 @@ const HeroInner = ({ btcData, ethData, solData }) => {
         animate="visible"
         className="flex flex-col text-center lg:text-left items-center lg:items-start h-full"
       >
-        {/* NAVIGATION BAR  */}
-        <motion.div variants={itemVariants} className="mb-8 md:mb-12 w-full max-w-md lg:max-w-none">
-          <AppBar
-            position="static"
-            className='backdrop-blur-xl rounded-2xl'
-            sx={{
-              backgroundColor: 'rgba(255, 255, 255, 0.02)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-              backgroundImage: 'none'
-            }}
-          >
-            <Toolbar className="justify-center px-2 md:px-4">
-              <Box className='flex justify-center gap-1 md:gap-6'>
-                {['home', 'news', 'popular'].map((v) => (
-                  <Button
-                    key={v}
-                    onClick={() => setView(v)}
-                    sx={{
-                      position: 'relative',
-                      color: 'white',
-                      fontSize: { xs: '0.85rem', md: '1.05rem' },
-                      minWidth: { xs: 'auto', md: '64px' },
-                      px: { xs: 1.5, md: 2 },
-                      textTransform: 'capitalize',
-                      '&:hover': {
-                        '&:after': {
-                          width: '100%',
-                        }
-                      },
-                      '&:after': {
-                        content: '""',
-                        position: 'absolute',
-                        bottom: -4,
-                        left: 0,
-                        width: view === v ? '100%' : '0%',
-                        height: '2px',
-                        background: 'linear-gradient(to right, #22d3ee, #a855f7)',
-                        transition: 'width 0.3s ease',
-                      }
-                    }}
-                  >
-                    {v}
-                  </Button>
-                ))}
-              </Box>
-            </Toolbar>
-          </AppBar>
-        </motion.div>
+          {/* NAVIGATION */}
+          <NavBar view={view} setView={setView} />
 
-        {/* CONTENT AREA */}
-        <Box className="flex-1 flex flex-col justify-center w-full items-center lg:items-start">
-          <AnimatePresence mode="wait">
+          {/* CONTENT AREA */}
+          <Box className="flex-1 flex flex-col justify-center w-full items-center lg:items-start">
+              {/* VIEWS */}
+              <AnimatePresence mode="wait">
+                {view === 'home' && <HomeView />}
+                {view === 'news' && <NewsView />}
+                {view === 'popular' && <PopularView btcData={btcData} ethData={ethData} solData={solData} />}
+              </AnimatePresence>
+          </Box>
 
-            {/* HOME_VIEW */}
-            {view === 'home' && (
-              <motion.div
-                key="home"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="flex flex-col items-center lg:items-start"
-              >
-                <Typography
-                  variant="h1"
-                  className='text-white font-black tracking-tighter mb-4'
-                  sx={{ fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' }, lineHeight: 1.1 }}
-                  gutterBottom
-                >
-                  Forge Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Crypto</span> Future
-                </Typography>
-                <Typography
-                  className='text-gray-400 max-w-md text-base md:text-xl leading-relaxed mb-8 md:mb-12'
-                  gutterBottom
-                >
-                  Step into the next generation of finance. Trade with precision,
-                  invest with clarity, and dominate the market with CryptoForge.
-                </Typography>
-
-                {/* BUTTONS_BOX */}
-                <Box className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto">
-                  <Button
-                    variant="contained"
-                    component={motion.button}
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className="rounded-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 font-bold text-base shadow-lg shadow-cyan-500/20"
-                  >
-                    Get Started
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    component={motion.button}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    sx={{
-                      px: 4,
-                      py: 1.5,
-                      borderColor: 'rgba(6, 182, 212, 0.3)',
-                      color: '#22d3ee',
-                      fontSize: '1rem',
-                      fontWeight: 'bold',
-                      textTransform: 'none',
-                    }}
-                  >
-                    Learn More
-                  </Button>
-                </Box>
-              </motion.div>
-            )}
-
-            {/* VIEWS_VIEW */}
-            {view === 'news' && (
-              <motion.div
-                key="news"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="text-white w-full"
-              >
-                <Typography variant="h3" className="font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 text-3xl md:text-4xl">Market Insights</Typography>
-                <Box className="space-y-4">
-                  {[1, 2, 3].map((i) => (
-                    <Box key={i} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 transition-colors cursor-pointer text-left">
-                      <Typography className="text-cyan-400 text-xs font-bold uppercase mb-1">Trending</Typography>
-                      <Typography className="font-semibold text-base md:text-lg">Bitcoin Hits New Yearly High as Adoption Surges</Typography>
-                    </Box>
-                  ))}
-                </Box>
-              </motion.div>
-            )}
-
-            {/* POPULAR_VIEW */}
-            {view === 'popular' && (
-              <motion.div
-                key="popular"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className='grid grid-cols-1 sm:grid-cols-2 gap-4 w-full'
-              >
-                {[
-                  { data: btcData, label: 'BTC' },
-                  { data: ethData, label: 'ETH' },
-                  { data: solData, label: 'SOL' }
-                ].map((coin, idx) => (
-                  <CoinBox key={idx}>
-                    <Box className='flex items-center gap-4'>
-                      <Box className="p-2 bg-white/5 rounded-lg border border-white/5 group-hover:border-cyan-500/30 transition-colors">
-                        {coin.data?.image && <img src={coin.data.image} alt={coin.label} className="w-6 h-6 md:w-8 md:h-8" />}
-                      </Box>
-                      <Box className="text-left">
-                        <Typography className="text-gray-400 text-[10px] md:text-xs font-bold uppercase">{coin.label}</Typography>
-                        <Typography variant='h6' className="text-white font-bold leading-none text-sm md:text-lg">
-                          {coin.data ? `$${coin.data.current_price.toLocaleString()}` : '...'}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </CoinBox>
-                ))}
-              </motion.div>
-            )}
-
-
-          </AnimatePresence>
-        </Box>
       </motion.div>
-
-      {/* 3D VISUAL AREA */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="relative h-[400px] sm:h-[500px] md:h-[650px] lg:h-auto w-full flex justify-center items-center mt-0 lg:mt-0 order-first lg:order-last"
-      >
-        <Box className="absolute w-[70%] h-[70%] bg-cyan-500/20 blur-[80px] md:blur-[120px] rounded-full animate-pulse pointer-events-none" />
-        <Box className="absolute w-[50%] h-[50%] bg-purple-500/15 blur-[60px] md:blur-[100px] rounded-full delay-700 animate-pulse pointer-events-none" />
-        {mounted && (
-          <Canvas camera={{ position: [0, 0, 7], fov: 80 }}>
-            <ETH />
-          </Canvas>
-        )}
-      </motion.div>
+        {/* 3D_SCENE */}
+        
+            <ThreeScene />
+        
     </Box>
   );
 };
