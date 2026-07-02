@@ -22,7 +22,20 @@
 - `UI animations created with Framer Motion`
 - `Utilization of Material UI library elements`
 
+## 📄 Licenses and Attributions
+
+This project uses external assets shared under Creative Commons licenses.
+
+### 3D Model
+**[Ethereum logo]** by [alex.yefremov](https://sketchfab.com/alex.yefremov), 
+available on [Sketchfab](https://sketchfab.com/3d-models/ethereum-logo-53fa5c82850a4b33a366c14994320dcc), 
+licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+No changes were made to the model
+
 
 ## 🖼️ IMG
+
+
 ![crypto-forge](crypto-forge.png)
 
